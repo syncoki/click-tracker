@@ -46,6 +46,7 @@
             font-size: 16px;
             cursor: pointer;
             width: 100%;
+            margin-top: 10px;
         }
         button:hover {
             background-color: #0056b3;
@@ -68,7 +69,7 @@
     <div class="container" id="login">
         <h2>Login</h2>
         <p>Please enter your password to access the tracker:</p>
-        <input type="password" id="password" placeholder="Enter password">
+        <input type="password" id="password" placeholder="Enter password" onkeypress="handleKeyPress(event)">
         <button onclick="checkPassword()">Login</button>
         <p id="error" style="display: none;">Incorrect password! Please try again.</p>
     </div>
@@ -77,6 +78,7 @@
         <h2>Click Tracker</h2>
         <p>Clicks today: <span id="clickCount">0</span></p>
         <button onclick="incrementClick()">Click Me!</button>
+        <button onclick="logout()">Logout</button>
     </div>
 
     <script>
@@ -97,6 +99,13 @@
             }
         }
 
+        // Handle Enter key press for login
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                checkPassword();
+            }
+        }
+
         // Load click count from localStorage
         function loadClicks() {
             const clicks = JSON.parse(localStorage.getItem('clicks')) || {};
@@ -109,6 +118,14 @@
             clicks[today] = (clicks[today] || 0) + 1;
             localStorage.setItem('clicks', JSON.stringify(clicks));
             document.getElementById('clickCount').innerText = clicks[today];
+        }
+
+        // Logout function to return to the login screen
+        function logout() {
+            document.getElementById('main').style.display = 'none';
+            document.getElementById('login').style.display = 'block';
+            document.getElementById('password').value = "";
+            document.getElementById('error').style.display = 'none';
         }
     </script>
 </body>
