@@ -12,33 +12,52 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f4f4f9;
+            background: linear-gradient(135deg, #f4f4f9, #dcdfe3);
         }
         .container {
             text-align: center;
             background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 350px;
+        }
+        h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
         }
         input[type="password"] {
-            padding: 10px;
+            padding: 12px;
             margin: 10px 0;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 5px;
             width: 100%;
+            font-size: 16px;
+            box-sizing: border-box;
         }
         button {
-            padding: 10px 20px;
+            padding: 12px;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
             background-color: #007BFF;
             color: white;
             font-size: 16px;
             cursor: pointer;
+            width: 100%;
         }
         button:hover {
             background-color: #0056b3;
+        }
+        p {
+            font-size: 14px;
+            color: #666;
+        }
+        #error {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
         }
         #main {
             display: none;
@@ -48,10 +67,10 @@
 <body>
     <div class="container" id="login">
         <h2>Login</h2>
-        <p>Enter your password to access the tracker:</p>
+        <p>Please enter your password to access the tracker:</p>
         <input type="password" id="password" placeholder="Enter password">
         <button onclick="checkPassword()">Login</button>
-        <p id="error" style="color: red; display: none;">Incorrect password!</p>
+        <p id="error" style="display: none;">Incorrect password! Please try again.</p>
     </div>
 
     <div class="container" id="main">
