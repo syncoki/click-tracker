@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        input[type="password"] {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007BFF;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #main {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="login">
+        <h2>Login</h2>
+        <p>Enter your password to access the tracker:</p>
+        <input type="password" id="password" placeholder="Enter password">
+        <button onclick="checkPassword()">Login</button>
+        <p id="error" style="color: red; display: none;">Incorrect password!</p>
+    </div>
+
+    <div class="container" id="main">
+        <h2>Click Tracker</h2>
+        <p>Clicks today: <span id="clickCount">0</span></p>
+        <button onclick="incrementClick()">Click Me!</button>
+    </div>
+
+    <script>
+        const correctPassword = "441808"; // Your password
+        const today = new Date().toISOString().slice(0, 10); // Get today's date (YYYY-MM-DD)
+
+        // Show/hide sections based on login
+        function checkPassword() {
+            const enteredPassword = document.getElementById('password').value;
+            const error = document.getElementById('error');
+
+            if (enteredPassword === correctPassword) {
+                document.getElementById('login').style.display = 'none';
+                document.getElementById('main').style.display = 'block';
+                loadClicks();
+            } else {
+                error.style.display = 'block';
+            }
+        }
+
+        // Load click count from localStorage
+        function loadClicks() {
+            const clicks = JSON.parse(localStorage.getItem('clicks')) || {};
+            document.getElementById('clickCount').innerText = clicks[today] || 0;
+        }
+
+        // Increment click count and save to localStorage
+        function incrementClick() {
+            const clicks = JSON.parse(localStorage.getItem('clicks')) || {};
+            clicks[today] = (clicks[today] || 0) + 1;
+            localStorage.setItem('clicks', JSON.stringify(clicks));
+            document.getElementById('clickCount').innerText = clicks[today];
+        }
+    </script>
+</body>
+</html>
