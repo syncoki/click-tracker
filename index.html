@@ -1,132 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Click Tracker</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background: linear-gradient(135deg, #f4f4f9, #dcdfe3);
-        }
-        .container {
-            text-align: center;
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 350px;
-        }
-        h2 {
-            margin-bottom: 20px;
-            font-size: 24px;
-            color: #333;
-        }
-        input[type="password"] {
-            padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            width: 100%;
-            font-size: 16px;
-            box-sizing: border-box;
-        }
-        button {
-            padding: 12px;
-            border: none;
-            border-radius: 5px;
-            background-color: #007BFF;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 10px;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        p {
-            font-size: 14px;
-            color: #666;
-        }
-        #error {
-            color: red;
-            font-size: 14px;
-            margin-top: 10px;
-        }
-        #main {
-            display: none;
-        }
-    </style>
+    <title>Meine GitHub Website</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container" id="login">
-        <h2>Login</h2>
-        <p>Please enter your password to access the tracker:</p>
-        <input type="password" id="password" placeholder="Enter password" onkeypress="handleKeyPress(event)">
-        <button onclick="checkPassword()">Login</button>
-        <p id="error" style="display: none;">Incorrect password! Please try again.</p>
-    </div>
+    <header>
+        <h1>Willkommen auf meiner GitHub Website</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Startseite</a></li>
+                <li><a href="#about">Über mich</a></li>
+                <li><a href="#contact">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <div class="container" id="main">
-        <h2>Click Tracker</h2>
-        <p>Clicks today: <span id="clickCount">0</span></p>
-        <button onclick="incrementClick()">Click Me!</button>
-        <button onclick="logout()">Logout</button>
-    </div>
+    <section id="home">
+        <h2>Startseite</h2>
+        <p>Dies ist die Startseite meiner GitHub Website.</p>
+    </section>
 
-    <script>
-        const correctPassword = "441808"; // Your password
-        const today = new Date().toISOString().slice(0, 10); // Get today's date (YYYY-MM-DD)
+    <section id="about">
+        <h2>Über mich</h2>
+        <p>Hier findest du Informationen über mich und meine Projekte.</p>
+    </section>
 
-        // Show/hide sections based on login
-        function checkPassword() {
-            const enteredPassword = document.getElementById('password').value;
-            const error = document.getElementById('error');
+    <section id="contact">
+        <h2>Kontakt</h2>
+        <p>Du kannst mich über <a href="mailto:meine.email@example.com">meine Email</a> erreichen.</p>
+    </section>
 
-            if (enteredPassword === correctPassword) {
-                document.getElementById('login').style.display = 'none';
-                document.getElementById('main').style.display = 'block';
-                loadClicks();
-            } else {
-                error.style.display = 'block';
-            }
-        }
-
-        // Handle Enter key press for login
-        function handleKeyPress(event) {
-            if (event.key === 'Enter') {
-                checkPassword();
-            }
-        }
-
-        // Load click count from localStorage
-        function loadClicks() {
-            const clicks = JSON.parse(localStorage.getItem('clicks')) || {};
-            document.getElementById('clickCount').innerText = clicks[today] || 0;
-        }
-
-        // Increment click count and save to localStorage
-        function incrementClick() {
-            const clicks = JSON.parse(localStorage.getItem('clicks')) || {};
-            clicks[today] = (clicks[today] || 0) + 1;
-            localStorage.setItem('clicks', JSON.stringify(clicks));
-            document.getElementById('clickCount').innerText = clicks[today];
-        }
-
-        // Logout function to return to the login screen
-        function logout() {
-            document.getElementById('main').style.display = 'none';
-            document.getElementById('login').style.display = 'block';
-            document.getElementById('password').value = "";
-            document.getElementById('error').style.display = 'none';
-        }
-    </script>
+    <footer>
+        <p>&copy; 2025 Meine GitHub Website</p>
+    </footer>
 </body>
 </html>
